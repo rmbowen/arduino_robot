@@ -1,6 +1,11 @@
 // IR Pin
 #define IR   A2
 
+// IR sensor power curve coefficients
+// Change to match measured values
+double a = 7408.3;
+double b = -1.204;
+
 void setup() {
 
     // Setup the Serial Port
@@ -13,23 +18,35 @@ void setup() {
 
 void loop() {
   
-  int irValue;
+  int irValue = readIR();
   
-  // Use function to read raw IR value
-  irValue = readIR();
-  
-  // Output the value to the monitor
+  // Read and output raw IR value
   Serial.print("IR (RAW): ");
+  Serial.print(readIR());
   
-  Serial.println(irValue);
-  
+  Serial.print("IR (Inches): ");
+  Serial.println(convertIRInches(irValue));
+
   // Wait for new measurement
   delay(1000);
   
 }
 
+// read and return the raw ir value
 int readIR()
 {
-   // read and return the raw ir value
    return analogRead(IR); 
+}
+
+// Read new IR value and return inches conversion
+double readIRInches()
+{
+  return convertIRInches(readIR());   
+}
+
+// Return power curve conversion from raw IR value to inches
+double convertIRInches(int rawValue)
+{
+     // change a and b to fit your sensor
+     return a*pow(rawValue,b); 
 }
