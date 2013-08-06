@@ -1,3 +1,17 @@
+/* FileName: ir_sensor
+ * 
+ * Author: Ryan M. Bowen
+ * Email:  rmb3518@gmail.com
+ *
+ * Description: Reads and converts analog IR sensor values.
+ *              Designed for use in RoboCamp - Expert @ RIT 
+ *
+ * PIN_OUT:
+ *            A2 <--- IR
+ *
+ * Hardware: Sharp IR GP2Y0A21
+ */
+ 
 // IR Pin
 #define IR   A2
 
@@ -17,22 +31,24 @@ void setup() {
 }
 
 void loop() {
-  
+ 
+  // Read a new IR value 
   int irValue = readIR();
   
-  // Read and output raw IR value
+  // Output raw IR value
   Serial.print("IR (RAW): ");
-  Serial.print(readIR());
+  Serial.print(irValue);
   
+  // Output the converted value (inches) 
   Serial.print("IR (Inches): ");
   Serial.println(convertIRInches(irValue));
 
-  // Wait for new measurement
+  // Delay for output
   delay(1000);
   
 }
 
-// read and return the raw ir value
+// Read and return the raw ir value
 int readIR()
 {
    return analogRead(IR); 
