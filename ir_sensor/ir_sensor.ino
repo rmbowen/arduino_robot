@@ -6,6 +6,8 @@
  * Description: Reads and converts analog IR sensor values.
  *              Designed for use in RoboCamp - Expert @ RIT 
  *
+ * Date Modified: 08/06/2013
+ *
  * PIN_OUT:
  *            A2 <--- IR
  *
@@ -20,6 +22,9 @@
 double a = 7408.3;
 double b = -1.204;
 
+/**
+ * setup - setup pin modes and serial port
+ */
 void setup() {
 
     // Setup the Serial Port
@@ -30,6 +35,9 @@ void setup() {
     
 }
 
+/**
+ * Main loop read and output IR values
+ */
 void loop() {
  
   // Read a new IR value 
@@ -48,19 +56,31 @@ void loop() {
   
 }
 
-// Read and return the raw ir value
+/**
+ * readIR - Read and return the raw IR value
+ * 
+ * @returns - IR Value in raw ADC value
+ */
 int readIR()
 {
    return analogRead(IR); 
 }
 
-// Read new IR value and return inches conversion
+/**
+ * readIRInches - Reads and return the converted IR value
+ * 
+ * @returns - IR Value in inches
+ */
 double readIRInches()
 {
   return convertIRInches(readIR());   
 }
 
-// Return power curve conversion from raw IR value to inches
+/**
+ * convertIRInches - Converts raw IR ADC value to inches
+ * 
+ * @returns - Converted raw ADC value to inches
+ */
 double convertIRInches(int rawValue)
 {
      // change a and b to fit your sensor
