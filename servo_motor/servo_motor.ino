@@ -29,6 +29,12 @@ void setup() {
   // Setup the Timer for Panning
   setupPanningTimer();
   
+  counter = 0;
+  
+  servoValue = SERVO_MID;
+  
+  turnOnServoPan();
+  
 }
 
 void loop() {
@@ -84,7 +90,7 @@ void turnOffServoPan()
 ISR(TIMER2_OVF_vect)
 {
   // Reset the timer 
-  TCNT = 6;
+  TCNT2 = 6;
   
   // Increment the counter
   counter += 1;
