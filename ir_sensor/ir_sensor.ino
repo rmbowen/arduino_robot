@@ -19,7 +19,9 @@ void loop() {
   irValue = readIR();
   
   // Output the value to the monitor
-  Serial.println("IR (RAW): " + irValue );
+  Serial.print("IR (RAW): ");
+  
+  Serial.println(irValue);
   
   // Wait for new measurement
   delay(1000);
